@@ -1,1 +1,1 @@
-# mall是基于myeclipse编写的电子商务平台，使用了java2EE框架SSM，前后端分离的设计方式实现
+﻿# mall是基于myeclipse编写的电子商务平台，使用了java2EE框架SSM，前后端分离的设计方式实现，使用mysql数据库store
