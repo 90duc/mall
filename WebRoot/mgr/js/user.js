@@ -12,14 +12,14 @@ function toNonNull(t) {
 }
 
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
 
 	function showAlldmin() {
 
-		$.get(urlpath + "queryAllUser.do", {}, function(data, status) {
+		$.get(Mgr.mgrUrl  + "queryAllUser.do", {}, function(data, status) {
 			if (status) {
 				if (data.length > 0) {
 					u_json_data=data;
@@ -81,7 +81,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
 		var admin_ser = $('#u_delete_id_show').text();
 
-		$.post(urlpath + "deleteUser.do", {
+		$.post(Mgr.mgrUrl + "deleteUser.do", {
 			uid : admin_ser
 		}, function(data, status) {
 
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "user.html";
+				window.location.href = Mgr.mgrUrl + "user.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();

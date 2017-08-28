@@ -12,6 +12,8 @@ public class Review {
     private Date rtime;
 
     private String rtext;
+    
+    private Double grade;
 
     public Integer getRid() {
         return rid;
@@ -58,4 +60,13 @@ public class Review {
 		return "Review [rid=" + rid + ", oid=" + oid + ", cid=" + cid
 				+ ", rtime=" + rtime + ", rtext=" + rtext + "]";
 	}
+
+	public Double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
+
 }

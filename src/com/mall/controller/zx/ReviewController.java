@@ -28,7 +28,7 @@ public class ReviewController {
 	@RequestMapping("publishReview.do")
 	public @ResponseBody
 	Map<String, Object> publishReview(HttpSession seesion, String text,
-			int cid, int oid) {
+			int cid, int oid,Double grade) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -36,21 +36,30 @@ public class ReviewController {
 		Integer uid = (Integer) seesion.getAttribute("uid");
 		if (!ordersService.select(oid).getUid().equals(uid)) {
 			map.put("status", false);
-			map.put("error", "不可评论别人的订单！");
+			map.put("msg", "不可评论别人的订单！");
+			return map;
 		}
-
+		System.out.println("是否已经评价");
+		if(reviewService.isPublished(cid, oid)){
+			map.put("status", false);
+			map.put("msg", "你已经评价过商品");
+			return map;
+		}
 		Review review = new Review();
 		review.setRtext(text);
 		review.setRtime(new Date());
 		review.setOid(oid);
 		review.setCid(cid);
-
+		review.setGrade(grade);
+		
+		
 		boolean value = reviewService.insert(review);
 		map.put("status", value);
 		if (!value) {
-			map.put("error", "请检查订单");
+			map.put("msg", "请检查订单");
+		}else {
+			map.put("msg", "评价成功");
 		}
-
 		return map;
 	}
 

@@ -1,18 +1,22 @@
 $(document).ready(function() {
 
 	$("#login_button").click(function() {
-		var urlpath="/mall/mgr/";
+		
 		var username = $('#username').val();
 		var password = $('#password').val();
-		$.get(urlpath+"loginAdmin.do", {
+		$.get(Mgr.mgrUrl +"loginAdmin.do", {
 			aid : username,
 			apassword : password
 		}, function(data, status) {
 			
 			if(status){
 				if(data.status)
-					//window.location.href=urlpath+"index.html";
-					history.back();
+					//window.location.href=Mgr.mgrUrl +"index.html";
+					if(document.referrer=="")
+						window.location.href=Mgr.mgrUrl +"index.html";
+					else
+						history.back();
+					
 				else{
 					$('#error-message').html(data.msg);
 					$('#error_span').show();

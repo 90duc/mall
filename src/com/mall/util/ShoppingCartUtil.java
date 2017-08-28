@@ -57,7 +57,7 @@ public class ShoppingCartUtil {
 			om.writeValue(w, shoppingCart);
 			Cookie cookie=new Cookie("shoppingCart",URLEncoder.encode(w.toString(),"UTF-8"));
 			cookie.setPath("/");
-			cookie.setMaxAge(5*60);
+			cookie.setMaxAge(60*60);
 			response.addCookie(cookie);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block

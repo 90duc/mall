@@ -1,13 +1,13 @@
-var urlpath = "/mall/mgr/";
+
 function showGoods(id) {
 
-	window.location.href = urlpath + 'goodsInfo.html?id=' + id;
+	window.location.href = Mgr.mgrUrl + 'goodsInfo.html?id=' + id;
 }
 
 
 function searchStype(value,st_id) {
 
-	$.post("/mall/queryStype.do", {
+	$.post(Mgr.rootUrl +"queryStype.do", {
 		btid : value
 	}, function(data, status) {
 
@@ -46,7 +46,7 @@ function home() {
 
 		var html = '<div class="product_info" onclick="showGoods(' + goods.cid
 				+ ')">' + '<div class="product_img">'
-				+ '<img  src="img/weitanai.jpg">' + '</div>' + '<div>'
+				+ '<img  src="'+Mgr.rootUrl+goods.miniPic+'">' + '</div>' + '<div>'
 				+ goods.cid + '：'
 				+ goods.cname + '</div>' + '<div>'
 				+ '<span>剩余量 <span style="color:green" >' + goods.cremain
@@ -62,19 +62,24 @@ function home() {
 		var bt_id = $("#big_tag").find("option:selected").val();
 		var st_id = $("#small_tag").find("option:selected").val();
 		var text_ser = $("#search_text").val();
-		$.post("/mall/search.do", {
+		$.post(Mgr.rootUrl +"search.do", {
 			btid : bt_id,
 			stid : st_id,
-			condition : text_ser
+			condition : text_ser,
+			currentPage:1,
+			pageSize:9999
+			
 		}, function(data, status) {
 
 			if (status) {
 				var list = data;
-
-				for ( var key in list) {
-					addGoods(list[key]);
+                var i=0;
+				for (;i<list.length-1;i++) {
+					addGoods(list[i]);
 				}
-
+                if(i<list[list.length-1].totalCount){
+                	queryGoods();
+                }
 			} else {
 				alert('请求失败');
 			}
@@ -82,7 +87,7 @@ function home() {
 		});
 
 	}
-	$.post("/mall/queryBtype.do", {
+	$.post(Mgr.rootUrl +"queryBtype.do", {
 
 	}, function(data, status) {
 

@@ -12,6 +12,10 @@ public class Commodity {
     private Double cprice;
 
     private Integer cremain;
+    
+    private String miniPic="goodsPic/default.gif";
+    
+    private Double grade;
 
     @Override
 	public String toString() {
@@ -67,5 +71,21 @@ public class Commodity {
     public void setCremain(Integer cremain) {
         this.cremain = cremain;
     }
+
+	public String getMiniPic() {
+		return miniPic;
+	}
+
+	public void setMiniPic(String miniPic) {
+		this.miniPic = miniPic;
+	}
+
+	public Double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
 
 }

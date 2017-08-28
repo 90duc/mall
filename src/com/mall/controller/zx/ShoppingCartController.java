@@ -121,18 +121,18 @@ public class ShoppingCartController {
 		System.out.println("用户id" + uid);
 		if(uid!=null){
 		List<PreOrder> pOrders = shoppingCartService.selectCart(uid);
-		for (PreOrder p : pOrders) {
-			System.out.println(p);
-		}
+//		for (PreOrder p : pOrders) {
+//			System.out.println(p);
+//		}
 		return shoppingCartService.selectCart(uid);
 		}
 		
 		ShoppingCart shoppingCart=ShoppingCartUtil.getShoppingCart(request);
 
 		if(shoppingCart!=null){
-			for(PreOrder item:shoppingCart.getItems()){
-				System.out.println(item.getCommodity().getCname()+item);
-			}
+//			for(PreOrder item:shoppingCart.getItems()){
+//				System.out.println(item.getCommodity().getCname()+item);
+//			}
 			return shoppingCart.getItems();
 		}
 		else return null;
@@ -141,12 +141,16 @@ public class ShoppingCartController {
 	// 12.删除购物车商品
 	@RequestMapping("deleteCart.do")
 	public @ResponseBody
-	Map<String, Object> deleteCart(HttpSession seesion, int cid) {
+	Map<String, Object> deleteCart(HttpServletResponse response,HttpServletRequest request,HttpSession seesion, int cid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer uid = (Integer) seesion.getAttribute("uid");
 		if (uid == null) {
-			map.put("status", false);
-			map.put("msg", "未登录");
+//			map.put("status", false);
+//			map.put("msg", "未登录");
+			ShoppingCart shoppingCart=ShoppingCartUtil.getShoppingCart(request);
+			shoppingCart.delete(cid);
+			ShoppingCartUtil.writeCookie(response, shoppingCart);
+			map.put("status", true);
 		} else {
 			PreOrder preOrder = new PreOrder();
 			preOrder.setCid(cid);
@@ -264,6 +268,7 @@ public class ShoppingCartController {
 				return map;
 			}
 			Map<String, Object> info = new HashMap<String, Object>();
+			info.put("img", c.getMiniPic());
 			info.put("cid", cidInts[i]);
 			info.put("cname", c.getCname());
 			info.put("csize", csizeInts[i]);

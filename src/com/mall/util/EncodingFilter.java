@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;  
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-@WebFilter(filterName="encodingFilter",urlPatterns={"*.do","*.xhtm"})  
+//@WebFilter(filterName="encodingFilter",urlPatterns={"*.do","*.xhtm"})  
 public class EncodingFilter implements Filter {  
       public void init(FilterConfig config) throws ServletException{}  
       public void destroy(){}  

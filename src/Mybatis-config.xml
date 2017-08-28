@@ -20,5 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/mall/mapper/ReviewMapper.xml" />
 		<mapper resource="com/mall/mapper/StypeMapper.xml" />
 		<mapper resource="com/mall/mapper/UserMapper.xml" />
+		<mapper resource="com/mall/mapper/UserHobbyMapper.xml" />
+		<mapper resource="com/mall/mapper/GoodsHobbyMapper.xml" />
+		<mapper resource="com/mall/mapper/GoodsPicsMapper.xml" />
 	</mappers>
 </configuration>

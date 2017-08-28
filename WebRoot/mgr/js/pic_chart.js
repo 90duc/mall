@@ -6,7 +6,7 @@ $(document).ready(function(e) {
 			return unescape(r[2]);
 		return null;
 	}
-	$.post("/mall/countMonthCommoditySales.do", {
+	$.post(Mgr.rootUrl +"countMonthCommoditySales.do", {
 		cid : GetQueryString("id")
 	}, function(data, status) {
 

@@ -17,6 +17,7 @@ function r_home() {
 		$('#c_id').html(data.cid);
 		$('#c_price').html(data.cprice);
 		$('#c_remain').html(data.cremain);
+		$('#goods_pic').attr('src',Mgr.rootUrl+data.miniPic);
 		if (data.btype != null) {
 			$('#btype_content').show();
 			$('#c_btname').html(data.btype);
@@ -44,7 +45,7 @@ function r_home() {
 
 	var c_id = GetQueryString('id');
 
-	$.post("/mall/getGoodsByCid.do", {
+	$.post(Mgr.rootUrl +"getGoodsByCid.do", {
 		cid : c_id,
 	}, function(data, status) {
 
@@ -56,7 +57,7 @@ function r_home() {
 		}
 	});
 
-	$.post("/mall/queryReview.do", {
+	$.post(Mgr.rootUrl +"queryReview.do", {
 		cid : c_id,
 	}, function(data, status) {
 
@@ -74,7 +75,7 @@ function r_home() {
 	
 	$('#r_del_bt').click(function() {
 
-		$.post("/mall/deleteReview.do", {
+		$.post(Mgr.rootUrl +"deleteReview.do", {
 			id : $('#r_del_bt').val()
 		}, function(data, status) {
 

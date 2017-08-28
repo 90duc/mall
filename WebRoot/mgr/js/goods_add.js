@@ -1,5 +1,5 @@
 function a_home() {
-	$.post("/mall/queryBtype.do", {
+	$.post(Mgr.rootUrl +"queryBtype.do", {
 
 	}, function(data, status) {
 
@@ -42,7 +42,7 @@ function a_home() {
 		var btid = $('#add_big_tag').val();
 		var stid = $('#add_small_tag').val();
 	
-		$.post("/mall/addGoods.do", {
+		$.post(Mgr.rootUrl +"addGoods.do", {
 			name : cname,
 			price : cprice,
 			size : cremain,

@@ -57,5 +57,7 @@ public interface CommodityService {
      * @return list
      */
     List<Commodity> fuzzySearch(String condition);
-	List<Commodity> search(Integer btid,Integer stid,String condition);
+	List<Commodity> search(Integer btid,Integer stid,String condition,String currentPage,String pageSize);
+	
+	int searchCount(Integer btid,Integer stid,String condition);
 }

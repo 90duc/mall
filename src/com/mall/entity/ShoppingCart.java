@@ -52,4 +52,12 @@ public class ShoppingCart {
 			po.setUid(uid);
 		}
 	}
+	public void delete(Integer cid){
+		for(PreOrder po:items){
+			if(po.getCid().equals(cid)){
+				items.remove(po);
+				break;
+			}
+		}
+	}
 }

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mall.entity.Commodity;
 import com.mall.entity.OrderInfo;
+import com.mall.entity.Pics;
 import com.mall.service.BtypeService;
 import com.mall.service.CommodityService;
+import com.mall.service.GoodsPicsService;
 import com.mall.service.OrdersService;
 import com.mall.service.StypeService;
+import com.mall.util.UObjects;
 
 /**
  * 商品操作
@@ -37,6 +40,8 @@ public class GoodsManagerController {
 	private StypeService stypeService;
 	@Autowired
 	private OrdersService ordersService;
+	@Autowired	
+	private GoodsPicsService goodsPicsService;
 	/**
 	 * 添加商品
 	 * @param name   
@@ -116,9 +121,15 @@ public class GoodsManagerController {
     
     @ResponseBody
  	@RequestMapping("search.do")
- 	public List<Commodity> search(Integer btid,Integer stid,String condition){
- 		
-    	return  commodityService.search(btid,stid,condition);
+ 	public List<Object> search(Integer btid,Integer stid,String condition,String currentPage,String pageSize){
+ 		System.out.println(currentPage+" "+pageSize+" "+condition);
+    	List<Object> result=new ArrayList<Object>();
+    	if(UObjects.isNonNullEmpty(condition))condition=condition.trim();
+ 		result.addAll(commodityService.search(btid,stid,condition,currentPage,pageSize));
+ 		Map<String, Integer> countPage=new HashMap<String, Integer>();
+ 		countPage.put("totalCount", commodityService.searchCount(btid, stid, condition));
+ 		result.add(countPage);
+    	return  result;
  	}
     
     @ResponseBody
@@ -136,6 +147,17 @@ public class GoodsManagerController {
     		map.put("stype", stypeService.select(commodity.getStid()).getStname());
     		map.put("cprice", commodity.getCprice());
     		map.put("cremain", commodity.getCremain());
+    		map.put("miniPic", commodity.getMiniPic());
+    		Pics pics=goodsPicsService.selectPics(cid);
+    		map.put("pic1", pics.getPic1());
+    		map.put("pic2", pics.getPic2());
+    		map.put("pic3", pics.getPic3());
+    		if(commodity.getGrade()==null||commodity.getGrade().equals(0.0)){
+    			map.put("grade", commodity.getGrade());
+    		}else{
+    			map.put("grade", String.format("%.1f", commodity.getGrade()));
+    		}
+    		
     		map.put("status", true);
     		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
     		String endTime=sdf.format(new Date());

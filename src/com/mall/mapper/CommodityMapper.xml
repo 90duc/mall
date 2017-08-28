@@ -8,6 +8,8 @@
     <result column="stid" property="stid" jdbcType="INTEGER" />
     <result column="cprice" property="cprice" jdbcType="DOUBLE" />
     <result column="cremain" property="cremain" jdbcType="INTEGER" />
+    <association column="cid" property="miniPic" select="com.mall.dao.GoodsPicsMapper.selectMiniPic" />
+    <association column="cid" property="grade" select="com.mall.dao.ReviewMapper.selectAvgGrade" />
   </resultMap>
   <sql id="Base_Column_List" >
     cid, cname, btid, stid, cprice, cremain
@@ -50,7 +52,23 @@
 	<if test="condition != null">
     	and cname like "%"#{condition}"%"
 	</if>
+	limit #{head},#{size}
   </select>
+  <select id="searchCount" resultType="integer">
+    select count(*)
+    from commodity
+    where 1=1
+    <if test="btid != null">
+    	and btid=#{btid}
+	</if>
+	<if test="stid != null">
+    	and stid=#{stid}
+	</if>
+	<if test="condition != null">
+    	and cname like "%"#{condition}"%"
+	</if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from commodity
     where cid = #{cid,jdbcType=INTEGER}

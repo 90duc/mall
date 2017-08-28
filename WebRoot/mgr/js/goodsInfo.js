@@ -13,6 +13,7 @@ function c_home() {
 		$('#c_id').html(data.cid);
 		$('#c_price').html(data.cprice);
 		$('#c_remain').html(data.cremain);
+		$('#goods_pic').attr('src',Mgr.rootUrl+data.miniPic);
 		if (data.btype != null) {
 			$('#btype_content').show();
 			$('#c_btname').html(data.btype);
@@ -28,6 +29,7 @@ function c_home() {
 		$('#mod_cid').val(data.cid);
 		$('#mod_cprice').val(data.cprice);
 		$('#mod_cremain').val(data.cremain);
+		$('#mod_goods_pic').attr('src',Mgr.rootUrl+data.miniPic);
 		$('#big_tag').val(data.btid);
 		initStype(data.btid);
 		setTimeout(function() {			
@@ -40,6 +42,7 @@ function c_home() {
 		$('#del_cid').val(data.cid);
 		$('#del_cprice').val(data.cprice);
 		$('#del_cremain').val(data.cremain);
+		$('#del_goods_pic').attr('src',Mgr.rootUrl+data.miniPic);
 		$('#del_btname').val(data.btype);
 		$('#del_stname').val(data.stype);
 
@@ -48,7 +51,7 @@ function c_home() {
 	var c_id = GetQueryString('id');
 	var operators = $('#nav_operator a');
 
-	$.post("/mall/getGoodsByCid.do", {
+	$.post(Mgr.rootUrl +"getGoodsByCid.do", {
 		cid : c_id,
 	}, function(data, status) {
 
@@ -67,7 +70,7 @@ function c_home() {
 		var btid = $('#big_tag').val();
 		var stid = $('#small_tag').val();
 
-		$.post("/mall/updateGoods.do", {
+		$.post(Mgr.rootUrl +"updateGoods.do", {
 			id : cid,
 			name : cname,
 			price : cprice,
@@ -88,13 +91,13 @@ function c_home() {
 
 		var cid = $('#del_cid').val();
 
-		$.post("/mall/deleteGoods.do", {
+		$.post(Mgr.rootUrl +"deleteGoods.do", {
 			id : cid,
 		}, function(data, status) {
 
 			if (status) {
 				if (data.status)
-					window.location.href="/mall/mgr/goods.html";
+					window.location.href=Mgr.mgrUrl +"goods.html";
 			} else {
 				alert("访问失败");
 			}

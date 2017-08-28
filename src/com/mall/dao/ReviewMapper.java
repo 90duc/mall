@@ -1,6 +1,7 @@
 package com.mall.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,6 @@ public interface ReviewMapper {
     int updateByPrimaryKey(Review record);
     
     List<Review> getReviewsByCid(Integer cid);
+    
+    int isPublished(Map<String, Object> map);
 }

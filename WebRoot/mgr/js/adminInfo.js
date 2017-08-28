@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$.get("/mall/mgr/queryAdmin.do", {}, function(data, status) {
+	$.get(Mgr.mgrUrl+"queryAdmin.do", {}, function(data, status) {
 		if (status) {
 			home_init(data);
 		} else {

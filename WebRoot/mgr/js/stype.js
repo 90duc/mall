@@ -15,12 +15,12 @@ function del_requset(value) {
 
 $(document).ready(
 		function() {
-			var urlpath = "/mall/mgr/";
+			
 			$.ajaxSetup({
 				cache : false
 			});
 
-			$.post("/mall/queryBtype.do", {
+			$.post(Mgr.rootUrl +"queryBtype.do", {
 			}, function(data, status) {
 
 				if (status) {
@@ -51,7 +51,7 @@ $(document).ready(
 
 			function showAlldmin() {
 
-				$.get("/mall/queryAllStype.do", {}, function(data, status) {
+				$.get(Mgr.rootUrl +"queryAllStype.do", {}, function(data, status) {
 					if (status) {
 						if (data.stypeList.length > 0) {
 							json_data = data.stypeList;
@@ -117,12 +117,12 @@ $(document).ready(
 			}
 			$('#jmp_to_btype').click(function() {
 
-				window.location.href = urlpath + "btype.html";
+				window.location.href =Mgr.mgrUrl + "btype.html";
 			});
 		});
 /* add */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -131,7 +131,7 @@ $(document).ready(function() {
 		var admin_ser = $('#st_add_name').val();
 		var admin_bt = $('#add_big_tag').val();
 
-		$.post("/mall/addStype.do", {
+		$.post(Mgr.rootUrl +"addStype.do", {
 			name : admin_ser,
 			id:admin_bt
 		}, function(data, status) {
@@ -144,7 +144,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "stype.html";
+				window.location.href = Mgr.mgrUrl  + "stype.html";
 			else {
 				$('#add_error-message').html(data.msg);
 				$('#add_error_span').show();
@@ -159,7 +159,7 @@ $(document).ready(function() {
 });
 /* modify */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -168,7 +168,7 @@ $(document).ready(function() {
 		var admin_ser = $('#st_mod_name').val();
 		var admin_btid = $('#mod_big_tag').val();
 
-		$.post("/mall/updateStype.do", {
+		$.post(Mgr.rootUrl +"updateStype.do", {
 			stid : admin_aid,
 			stname : admin_ser,
 			btid : admin_btid
@@ -186,7 +186,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "stype.html";
+				window.location.href = Mgr.mgrUrl + "stype.html";
 			else {
 				$('#mod_error-message').html(data.msg);
 				$('#mod_error_span').show();
@@ -201,7 +201,7 @@ $(document).ready(function() {
 });
 /* delete */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -210,7 +210,7 @@ $(document).ready(function() {
 
 		var admin_ser = $('#st_delete_id_show').text();
 
-		$.post("/mall/deleteStype.do", {
+		$.post(Mgr.rootUrl +"deleteStype.do", {
 			id : admin_ser
 		}, function(data, status) {
 
@@ -227,7 +227,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "stype.html";
+				window.location.href = Mgr.mgrUrl +"stype.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();

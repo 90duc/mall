@@ -16,14 +16,14 @@ function del_requset(value) {
 
 $(document).ready(
 		function() {
-			var urlpath = "/mall/mgr/";
+		
 			$.ajaxSetup({
 				cache : false
 			});
 
 			function showAlldmin() {
 
-				$.get(urlpath + "queryAdminInfo.do", {},
+				$.get(Mgr.mgrUrl + "queryAdminInfo.do", {},
 						function(data, status) {
 							if (status) {
 								if (data.length > 0) {
@@ -87,7 +87,7 @@ $(document).ready(
 		});
 /* add */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+
 	$.ajaxSetup({
 		cache : false
 	});
@@ -96,7 +96,7 @@ $(document).ready(function() {
 		var admin_ser = $('#admin_add_aname').val();
 		var pass_ser = $('#admin_add_password').val();
 		var a_type = $('#admin_add_atype').val();
-		$.post(urlpath + "addAdmin.do", {
+		$.post(Mgr.mgrUrl +  "addAdmin.do", {
 			aname : admin_ser,
 			apassword : pass_ser,
 			atype : a_type
@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "manager.html";
+				window.location.href = Mgr.mgrUrl + "manager.html";
 			else {
 				$('#add_error-message').html(data.msg);
 				$('#add_error_span').show();
@@ -125,7 +125,7 @@ $(document).ready(function() {
 });
 /* modify */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -134,7 +134,7 @@ $(document).ready(function() {
 		var admin_ser = $('#admin_mod_aname').val();
 		var pass_ser = $('#admin_mod_password').val();
 		var admin_mod_atype = $('#admin_mod_atype').val();
-		$.post(urlpath + "updateAdmin.do", {
+		$.post(Mgr.mgrUrl + "updateAdmin.do", {
 			aid : admin_aid,
 			aname : admin_ser,
 			apassword : pass_ser,
@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "manager.html";
+				window.location.href = Mgr.mgrUrl + "manager.html";
 			else {
 				$('#mod_error-message').html(data.msg);
 				$('#mod_error_span').show();
@@ -168,7 +168,7 @@ $(document).ready(function() {
 });
 /* delete */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -177,7 +177,7 @@ $(document).ready(function() {
 
 		var admin_ser =$('#m_delete_id_show').text();
 
-		$.post(urlpath + "deleteAdmin.do", {
+		$.post(Mgr.mgrUrl +"deleteAdmin.do", {
 			aid : admin_ser
 		}, function(data, status) {
 
@@ -194,7 +194,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "manager.html";
+				window.location.href =Mgr.mgrUrl + "manager.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();

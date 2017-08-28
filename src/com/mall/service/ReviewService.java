@@ -1,6 +1,7 @@
 package com.mall.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -32,4 +33,6 @@ public interface ReviewService {
      * @return list
      */
     List<Review> getReviewsByCid(Integer cid);
+    
+    boolean isPublished(Integer cid,Integer oid);
 }

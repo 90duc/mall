@@ -7,15 +7,22 @@
     <result column="cid" property="cid" jdbcType="INTEGER" />
     <result column="rtime" property="rtime" jdbcType="TIMESTAMP" />
     <result column="rtext" property="rtext" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    rid, oid, cid, rtime, rtext
+    rid, oid, cid, rtime, rtext, grade
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from review
     where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAvgGrade" resultType="double" parameterType="java.lang.Integer" >
+    select avg(grade)
+    from review
+    where cid = #{cid,jdbcType=INTEGER}
   </select>
   <select id="getReviewsByCid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,15 +31,21 @@
     where cid = #{cid,jdbcType=INTEGER}
     order by rtime desc
   </select>
+  <select id="isPublished" resultType="integer">
+    select count(*)
+    from review
+    where cid = #{cid,jdbcType=INTEGER}
+    	and oid=#{oid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from review
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mall.entity.Review" >
     insert into review (rid, oid, cid, 
-      rtime, rtext)
+      rtime, rtext,grade)
     values (#{rid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
-      #{rtime,jdbcType=TIMESTAMP}, #{rtext,jdbcType=VARCHAR})
+      #{rtime,jdbcType=TIMESTAMP}, #{rtext,jdbcType=VARCHAR},#{grade,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.mall.entity.Review" >
     insert into review
@@ -52,6 +65,9 @@
       <if test="rtext != null" >
         rtext,
       </if>
+      <if test="grade != null" >
+        grade,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="rid != null" >
@@ -68,6 +84,9 @@
       </if>
       <if test="rtext != null" >
         #{rtext,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>

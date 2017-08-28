@@ -13,15 +13,14 @@ function del_requset(value) {
 }
 
 $(document).ready(
-		function() {
-			var urlpath = "/mall/mgr/";
+		function() {		
 			$.ajaxSetup({
 				cache : false
 			});
 
 			function showAlldmin() {
 
-				$.get( "/mall/queryBtype.do", {},
+				$.get( Mgr.rootUrl+"queryBtype.do", {},
 						function(data, status) {
 							if (status) {
 								if (data.btypeList.length > 0) {
@@ -83,12 +82,12 @@ $(document).ready(
 			}
 			$('#jmp_to_stype').click(function(){
 				
-				window.location.href=urlpath+"stype.html";
+				window.location.href=Mgr.mgrUrl +"stype.html";
 			});
 		});
 /* add */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -96,7 +95,7 @@ $(document).ready(function() {
 
 		var admin_ser = $('#bt_add_name').val();
 		
-		$.post("/mall/addBtype.do", {
+		$.post(Mgr.rootUrl+"addBtype.do", {
 			name : admin_ser,		
 		}, function(data, status) {
 			dowith(data, status);
@@ -108,7 +107,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "btype.html";
+				window.location.href = Mgr.mgrUrl + "btype.html";
 			else {
 				$('#add_error-message').html(data.msg);
 				$('#add_error_span').show();
@@ -123,7 +122,7 @@ $(document).ready(function() {
 });
 /* modify */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+
 	$.ajaxSetup({
 		cache : false
 	});
@@ -131,7 +130,7 @@ $(document).ready(function() {
 		var admin_aid = $('#bt_mod_id').val();
 		var admin_ser = $('#bt_mod_name').val();
 	
-		$.post( "/mall/updateBtype.do", {
+		$.post( Mgr.rootUrl +"updateBtype.do", {
 			btid : admin_aid,
 			btname : admin_ser,
 		}, function(data, status) {
@@ -148,7 +147,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "btype.html";
+				window.location.href = Mgr.mgrUrl  + "btype.html";
 			else {
 				$('#mod_error-message').html(data.msg);
 				$('#mod_error_span').show();
@@ -163,7 +162,7 @@ $(document).ready(function() {
 });
 /* delete */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -172,7 +171,7 @@ $(document).ready(function() {
 
 		var admin_ser =$('#bt_delete_id_show').text();
 
-		$.post("/mall/deleteBtype.do", {
+		$.post(Mgr.rootUrl +"deleteBtype.do", {
 			id : admin_ser
 		}, function(data, status) {
 
@@ -189,7 +188,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "btype.html";
+				window.location.href = Mgr.mgrUrl + "btype.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();

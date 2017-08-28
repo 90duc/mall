@@ -1,13 +1,13 @@
-var Mgr={};
+document.write('<script src="js/data.js"><\/script>');
+
 function no_login_jmp(){
 	window.location.href="login.html";
 }
 
 $(document).ready(function() {
         var arrayList =[];	    
-		var urlpath="/mall/mgr/";
 		$.ajaxSetup({cache:false}); 
-		$.get(urlpath+"checkLogin.do", {
+		$.get(Mgr.mgrUrl +"checkLogin.do", {
 		}, function(data, status) {
 			
 			if(status){
@@ -41,11 +41,11 @@ $(document).ready(function() {
      
      $('#logout_bt').click(function(){
     	 $.ajaxSetup ({ cache: false });
-    	 $.get(urlpath+"logoutAdmin.do", {
+    	 $.get(Mgr.mgrUrl +"logoutAdmin.do", {
  		}, function(data, status) {
  			
  			if(status){
- 				 window.location.href=urlpath+'index.html'; 				
+ 				 window.location.href=Mgr.mgrUrl +'index.html'; 				
  			}else{
  				alert('请求失败');				
  			}

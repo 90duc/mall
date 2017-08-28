@@ -1,6 +1,8 @@
 package com.mall.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,5 +51,15 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
     public List<Review> getReviewsByCid(Integer cid) {
 		return reviewMapper.getReviewsByCid(cid);
+	}
+	@Override
+	public boolean isPublished(Integer cid, Integer oid) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("cid", cid);
+		map.put("oid", oid);
+		if(reviewMapper.isPublished(map)>=1){
+			return true;
+		}
+		return false;
 	}
 }

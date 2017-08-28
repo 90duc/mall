@@ -57,6 +57,7 @@ public class ReviewManagerController {
 			}
 			map.put("time", UObjects.fomateDate(r.getRtime()));
 			map.put("text", r.getRtext());
+			map.put("grade", r.getGrade());
 			list.add(map);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -13,6 +13,7 @@ function p_home() {
 		$('#c_id').html(data.cid);
 		$('#c_price').html(data.cprice);
 		$('#c_remain').html(data.cremain);
+		$('#goods_pic').attr('src',Mgr.rootUrl+data.miniPic);
 		if (data.btype != null) {
 			$('#btype_content').show();
 			$('#c_btname').html(data.btype);
@@ -26,7 +27,7 @@ function p_home() {
 	
 	var c_id = GetQueryString('id');
 	
-	$.post("/mall/getGoodsByCid.do", {
+	$.post(Mgr.rootUrl +"getGoodsByCid.do", {
 		cid : c_id,
 	}, function(data, status) {
 

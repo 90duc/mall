@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mall.dao.UserMapper;
 import com.mall.entity.User;
 import com.mall.service.UserService;
+import com.mall.tool.Encryption;
 import com.mall.util.UObjects;
 
 @Service
@@ -48,7 +49,8 @@ public class UserServiceImpl implements UserService {
 		if (user == null)
 			return null;
 		// 密码相同，使用MD5
-		if (Objects.equals(user.getUpassword(), password.trim()))
+		System.out.println("密码验证");
+		if (user.getUpassword().equals(Encryption.getMD5Encryption(password)))
 			return user;
 
 		return null;
@@ -81,7 +83,8 @@ public class UserServiceImpl implements UserService {
 
 		if (!checkRegisterUser(user))
 			return false;
-
+		if(UObjects.isNonNullEmpty(user.getUpassword()))
+		user.setUpassword(Encryption.getMD5Encryption(user.getUpassword()));
 		int res = userMapper.insert(user);
 		return res > 0;
 	}
@@ -122,6 +125,8 @@ public class UserServiceImpl implements UserService {
 	public boolean update(User user) {
 		if (!checkUpateUser(user))
 			return false;
+		if(UObjects.isNonNullEmpty(user.getUpassword()))
+			user.setUpassword(Encryption.getMD5Encryption(user.getUpassword()));
 		int res = userMapper.updateByPrimaryKey(user);
 		return res > 0;
 	}

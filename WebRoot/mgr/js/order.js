@@ -36,14 +36,14 @@ function toNull(t) {
 }
 $(document).ready(
 		function() {
-			var urlpath = "/mall/mgr/";
+			
 			$.ajaxSetup({
 				cache : false
 			});
 
 			function showAlldmin() {
 
-				$.get("/mall/queryAllOrders.do", {}, function(data, status) {
+				$.get(Mgr.rootUrl +"queryAllOrders.do", {}, function(data, status) {
 					if (status) {
 						if (data.length > 0) {
 							o_json_data=data;
@@ -146,7 +146,7 @@ $(document).ready(
 		});
 /* 修改 */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -163,7 +163,7 @@ $(document).ready(function() {
 		var opostcode = toNull($('#mod_opostcode').val());
 		var ostate = toNull($('#mod_ostate').val());
 
-		$.post("/mall/updateOrders.do", {
+		$.post(Mgr.rootUrl +"updateOrders.do", {
 			oid : oid,
 			oname : oname,
 			oaddress : oaddr,
@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "order.html";
+				window.location.href = Mgr.mgrUrl + "order.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();
@@ -204,7 +204,7 @@ $(document).ready(function() {
 });
 /* 删除 */
 $(document).ready(function() {
-	var urlpath = "/mall/mgr/";
+	
 	$.ajaxSetup({
 		cache : false
 	});
@@ -213,7 +213,7 @@ $(document).ready(function() {
 
 		var admin_ser = $('#o_delete_id_show').text();
 
-		$.post("/mall/deleteOrdersById.do", {
+		$.post(Mgr.rootUrl +"deleteOrdersById.do", {
 			oid : admin_ser
 		}, function(data, status) {
 
@@ -230,7 +230,7 @@ $(document).ready(function() {
 
 		if (status) {
 			if (data.status)
-				window.location.href = urlpath + "order.html";
+				window.location.href = Mgr.mgrUrl + "order.html";
 			else {
 				$('#del_error-message').html(data.msg);
 				$('#del_error_span').show();

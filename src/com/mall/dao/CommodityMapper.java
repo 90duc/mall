@@ -23,4 +23,6 @@ public interface CommodityMapper {
     List<Commodity> selectAll(Map<String,Integer> type);
     List<Commodity> fuzzySearch(String condition);
     List<Commodity> search(Map<String, Object> map);
+    
+    int searchCount(Map<String, Object> map);
 }
